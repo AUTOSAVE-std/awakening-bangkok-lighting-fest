@@ -32,7 +32,7 @@ void leapOnExit() {
 
 void draw() {
   background(0);
-  
+
   for (Hand hand : leap.getHands ()) {
     int     handId             = hand.getId();
     PVector handPosition       = hand.getPosition();
@@ -82,14 +82,17 @@ void draw() {
         break;
       }
 
-      sx += (handPosition.x - sx) * easing;
-      sy += (handPosition.y - sy) * easing;
-      //ellipse(sx,sy,10,10);
+      //sx += (handPosition.x - sx) * easing;
+      //sy += (handPosition.y - sy) * easing;
+
+      sx += (fingerPosition.x - sx) * easing;
+      sy += (fingerPosition.y - sy) * easing;
+
 
       strokeWeight(2);
 
-      for (int i = 100; i < width ; i+= 100) {
-        for ( int y = 100; y < height ; y += 100) {
+      for (int i = 100; i < width; i+= 100) {
+        for ( int y = 100; y < height; y += 100) {
           float d = dist(i, y, sx, sy);
           float f = l / d;
           float dx = sx - i;
@@ -98,6 +101,8 @@ void draw() {
             dx *= -1;
             dy *= -1;
             stroke(random(255), random(255), 0);
+          } else if ( handGrab == 0 ) {
+            stroke(255);
           }
           noFill();
           curve(i, y, i+ dx*f, y+dy*f, i+ dx*f, y+dy*f, sx, sy);
