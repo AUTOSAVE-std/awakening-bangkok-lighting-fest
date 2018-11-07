@@ -100,7 +100,7 @@ void draw() {
           if ( handGrab == 1 ) {
             dx *= -1;
             dy *= -1;
-            stroke(random(255), random(255), random(255));
+            stroke(random(255), random(255));
           } else if ( handGrab == 0 ) {
             stroke(255);
           }
