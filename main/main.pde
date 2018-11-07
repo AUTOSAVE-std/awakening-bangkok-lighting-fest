@@ -1,21 +1,9 @@
 import de.voidplus.leapmotion.*;
 
-// ======================================================
-// Table of Contents:
-// ├─ 1. Callbacks
-// ├─ 2. Hand
-// ├─ 3. Arms
-// ├─ 4. Fingers
-// ├─ 5. Bones
-// ├─ 6. Tools
-// └─ 7. Devices
-// ======================================================
-
-
 LeapMotion leap;
 
 void setup() {
-  size(800, 500);
+  fullScreen();
   background(255);
   // ...
 
@@ -132,23 +120,6 @@ void draw() {
       // ------------------------------------------------
       // Selection
 
-      switch(finger.getType()) {
-      case 0:
-        // System.out.println("thumb");
-        break;
-      case 1:
-        // System.out.println("index");
-        break;
-      case 2:
-        // System.out.println("middle");
-        break;
-      case 3:
-        // System.out.println("ring");
-        break;
-      case 4:
-        // System.out.println("pinky");
-        break;
-      }
 
 
       // ================================================
@@ -222,16 +193,13 @@ void draw() {
         // println("Touching (#" + toolId + ")");
         break;
       }
+      
+      
+      
+      
     }
   }
 
 
-  // ====================================================
-  // 7. Devices
-
-  for (Device device : leap.getDevices()) {
-    float deviceHorizontalViewAngle = device.getHorizontalViewAngle();
-    float deviceVericalViewAngle = device.getVerticalViewAngle();
-    float deviceRange = device.getRange();
-  }
+ 
 }
