@@ -1,4 +1,7 @@
+import spout.*;
 import de.voidplus.leapmotion.*;
+
+Spout spout;
 LeapMotion leap;
 
 int l = 30;
@@ -8,10 +11,14 @@ float easing = 0.06;
 
 void setup() {
   background(0);
-  fullScreen();
-  //size(600, 600);
+  //fullScreen(P3D);
+  size(600, 600, P3D);
   stroke(255);
   leap = new LeapMotion(this);
+
+  spout = new Spout(this);
+
+  spout.createSender("Test 1 : p1");
 }
 
 void leapOnInit() {
@@ -33,6 +40,9 @@ void leapOnExit() {
 void draw() {
   background(0);
 
+  
+
+  //int fps = leap.getFrameRate();
   for (Hand hand : leap.getHands ()) {
     int     handId             = hand.getId();
     PVector handPosition       = hand.getPosition();
@@ -81,7 +91,6 @@ void draw() {
         // System.out.println("pinky");
         break;
       }
-
       //sx += (handPosition.x - sx) * easing;
       //sy += (handPosition.y - sy) * easing;
 
@@ -100,7 +109,7 @@ void draw() {
           if ( handGrab == 1 ) {
             dx *= -1;
             dy *= -1;
-            stroke(random(255), random(255));
+            stroke(random(255), 0, random(255));
           } else if ( handGrab == 0 ) {
             stroke(255);
           }
@@ -111,4 +120,5 @@ void draw() {
       }
     }
   }
+  spout.sendTexture();
 }
