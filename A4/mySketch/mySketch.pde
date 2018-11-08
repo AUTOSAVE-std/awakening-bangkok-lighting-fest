@@ -93,11 +93,13 @@ void draw() {
           float sz1 = map(cos(-theta+offSet), -1, 1, -60, 0);
           float sz2 = map(cos(-theta+offSet), -1, 1, 60, -60);
           if (handGrab == 1){
-            hg = 1000;
+            hg = 1500;
+          }else if (handGrab < 1){
+            hg = 60;
           }
           float rot = map(cos(-theta+offSet), -1, 1, 0, hg);
 
-          strokeWeight(2);
+          strokeWeight(5);
 
           if ((x+y)%120 == 0) {
             stroke(#FF0000);
