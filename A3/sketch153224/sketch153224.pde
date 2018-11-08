@@ -6,7 +6,8 @@ LeapMotion leap;
 int hg;
 
 void setup() {
-  size(500, 500);
+  fullScreen();
+  //size(500, 500);
   fill(0);
   noStroke();
   rectMode(CENTER);
@@ -83,9 +84,10 @@ void draw() {
         // System.out.println("pinky");
         break;
       }
-      for (int x = 10; x < width; x += 20) {
-        for (int y = 10; y < height; y += 20) {
+      for (int x = 10; x < width; x += 40) {
+        for (int y = 10; y < height; y += 40) {
           float n = noise(x * 0.005, y * 0.005, frameCount * 0.05);
+          //println(x);
           pushMatrix();
           translate(x, y);
           if (handGrab == 1){
@@ -95,12 +97,8 @@ void draw() {
           }
           rotate(TWO_PI + hg * n);
  
-          scale(30 * n);
-          //if (handGrab == 1) {
-          //  rect(0, 0, 20, 20);
-          //} else {
-          //  rect(0, 0, 1, 1);
-          //}
+          scale(20 * n);
+          println(n);
           rect(hg/10, hg/10, 1, 1);
           popMatrix();
         }
