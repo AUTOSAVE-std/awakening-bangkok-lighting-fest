@@ -11,14 +11,14 @@ float easing = 0.06;
 
 void setup() {
   background(0);
-  //fullScreen(P3D);
-  size(600, 600, P3D);
+  fullScreen(P3D);
+  //size(600, 600, P3D);
   stroke(255);
   leap = new LeapMotion(this);
 
   spout = new Spout(this);
 
-  spout.createSender("Test 1 : p1");
+  spout.createSender("Test 1 : A1");
 }
 
 void leapOnInit() {
@@ -91,17 +91,18 @@ void draw() {
         // System.out.println("pinky");
         break;
       }
-      //sx += (handPosition.x - sx) * easing;
-      //sy += (handPosition.y - sy) * easing;
+      sx += (handPosition.x - sx) * easing;
+      sy += (handPosition.y - sy) * easing;
+      
+      //sx += (fingerPosition.x - sx) * easing;
+      //sy += (fingerPosition.y - sy) * easing;
 
-      sx += (fingerPosition.x - sx) * easing;
-      sy += (fingerPosition.y - sy) * easing;
 
 
       strokeWeight(2);
 
-      for (int i = 100; i < width; i+= 100) {
-        for ( int y = 100; y < height; y += 100) {
+      for (int i = 0; i < width; i+= 60) {
+        for ( int y = 0; y < height; y += 60) {
           float d = dist(i, y, sx, sy);
           float f = l / d;
           float dx = sx - i;
@@ -109,8 +110,8 @@ void draw() {
           if ( handGrab == 1 ) {
             dx *= -1;
             dy *= -1;
-            stroke(random(255), 0, random(255));
-          } else if ( handGrab == 0 ) {
+            stroke(random(255), random(255), random(255));
+          } else if ( handGrab < 1 ) {
             stroke(255);
           }
           noFill();
