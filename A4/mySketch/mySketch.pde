@@ -1,3 +1,6 @@
+import spout.*;
+Spout spout;
+
 import de.voidplus.leapmotion.*;
 LeapMotion leap;
 
@@ -12,6 +15,8 @@ void setup() {
   //size(540, 540, P2D);
   noFill();
   leap = new LeapMotion(this);
+  spout = new Spout(this);
+  spout.createSender("Test : A4");
 }
 
 void leapOnInit() {
@@ -114,6 +119,7 @@ void draw() {
       popMatrix();
     }
   }
+  spout.sendTexture();
 }
 
 void shape(float xPos, float yPos, float pOne, float pTwo, float rot) {
