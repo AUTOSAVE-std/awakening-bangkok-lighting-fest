@@ -1,12 +1,16 @@
+import spout.*;
+Spout spout;
+
 import de.voidplus.leapmotion.*;
 LeapMotion leap;
+
 
 // Nervous Waves 2
 // Levente Sandor, 2014
 int hg;
 
 void setup() {
-  fullScreen();
+  fullScreen(P3D);
   //size(500, 500);
   fill(0);
   noStroke();
@@ -15,6 +19,8 @@ void setup() {
   noiseDetail(2, 0.9);
 
   leap = new LeapMotion(this);
+  spout = new Spout(this);
+  spout.createSender("Test : A3");
 }
 
 void leapOnInit() {
@@ -105,4 +111,5 @@ void draw() {
       }
     }
   }
+  spout.sendTexture();
 }
