@@ -14,6 +14,7 @@ void setup() {
   fullScreen(P3D);
   //size(600, 600, P3D);
   stroke(255);
+  strokeWeight(4);
   leap = new LeapMotion(this);
 
   spout = new Spout(this);
