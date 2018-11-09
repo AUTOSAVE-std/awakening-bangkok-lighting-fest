@@ -1,3 +1,6 @@
+import spout.*;
+Spout spout;
+
 import de.voidplus.leapmotion.*;
 LeapMotion leap;
 
@@ -6,13 +9,15 @@ void setup() {
   //size(800, 600, P3D);
   randX=random(1.5, 2.5);
   randY=random(1.5, 2.5);
-  textSize(30);
+  textSize(10);
 
   for (int i=0; i<a.length; i++) {
     a[i]=i*70+15;
     b[i]=i*70+15;
 
     leap = new LeapMotion(this);
+    spout = new Spout(this);
+    spout.createSender("test : a5");
   }
 }
 int hg;
@@ -22,7 +27,7 @@ float prevY;
 float newX;
 float newY;
 
-float speed = 5;
+float speed = 1;
 
 int move=0;
 
@@ -131,9 +136,9 @@ void draw() {
         break;
       }
       if (handGrab == 0) {
-        hg = 40;
+        hg = 25;
       } else if (handGrab > 0) {
-        hg = 20;
+        hg = 10;
       }
 
       fill(255);
@@ -182,4 +187,5 @@ void draw() {
       }
     }
   }
+  spout.sendTexture();
 }
