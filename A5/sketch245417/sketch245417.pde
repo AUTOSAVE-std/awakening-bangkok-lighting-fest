@@ -2,46 +2,37 @@ import de.voidplus.leapmotion.*;
 LeapMotion leap;
 
 void setup() {
-  size(800, 600, P3D);
-  mX=-10000;
-  mY=-10000;
+  fullScreen(P3D);
+  //size(800, 600, P3D);
   randX=random(1.5, 2.5);
   randY=random(1.5, 2.5);
-  textSize(16);
+  textSize(30);
 
   for (int i=0; i<a.length; i++) {
-    a[i]=i*20+140;
-    b[i]=i*20+50;
+    a[i]=i*70+15;
+    b[i]=i*70+15;
 
     leap = new LeapMotion(this);
   }
 }
-
-float mX;
-float mY;
-//these are coordinates for the ball. If you wanted to use your mouse,
-//you'd set these equal to MouseX and MouseY in mouseMoved()
-
+int hg;
+int c;
 float prevX;
 float prevY;
 float newX;
 float newY;
 
-float speed = 2;
+float speed = 5;
 
 int move=0;
 
-int a[]= new int[25];
-int b[]= new int[25];
-
-//because I'm lazy and didn't want to make a fillArray() function
+int a[]= new int[30];
+int b[]= new int[30];
 
 float d;
-//used when calculating distance between ball and point
 
 float randX;
 float randY;
-//the random speed at which the ball moves in X and Y
 
 void leapOnInit() {
   // println("Leap Motion Init");
@@ -139,6 +130,11 @@ void draw() {
         // System.out.println("pinky");
         break;
       }
+      if (handGrab == 0) {
+        hg = 40;
+      } else if (handGrab > 0) {
+        hg = 20;
+      }
 
       fill(255);
       stroke(255);
@@ -147,11 +143,11 @@ void draw() {
         for (int j=0; j<b.length; j++) {
           d=dist(handPosition.x, handPosition.y, a[i], b[j]);
           if (d==0)
-            d=.0001;
-          newX=a[i]-(25/d)*(handPosition.x-a[i]);
-          newY=b[j]-(25/d)*(handPosition.y-b[j]);
+            d=.005;
+          newX=a[i]-(30/d)*(handPosition.x-a[i]);
+          newY=b[j]-(30/d)*(handPosition.y-b[j]);
 
-          ellipse(newX, newY, 10, 10);
+          ellipse(newX, newY, hg, hg);
           if (prevX!=-1)
             line(prevX, prevY, newX, newY);
           prevX=newX;
@@ -174,8 +170,8 @@ void draw() {
           d=dist(handPosition.x, handPosition.y, a[i], b[j]);
           if (d==0)
             d=.001;
-          newX=a[i]-(25/d)*(handPosition.x-a[i]);
-          newY=b[j]-(25/d)*(handPosition.y-b[j]);
+          newX=a[i]-(30/d)*(handPosition.x-a[i]);
+          newY=b[j]-(30/d)*(handPosition.y-b[j]);
           if (prevX!=-1)
             line(prevX, prevY, newX, newY);
           prevX=newX;
@@ -187,8 +183,3 @@ void draw() {
     }
   }
 }
-
-    void mouseMoved() {
-      mX=mouseX;
-      mY=mouseY;
-    }
