@@ -1,5 +1,5 @@
-import spout.*;
-Spout spout;
+//import spout.*;
+//Spout spout;
 
 import de.voidplus.leapmotion.*;
 LeapMotion leap;
@@ -19,8 +19,8 @@ void setup() {
   noiseDetail(2, 0.9);
 
   leap = new LeapMotion(this);
-  spout = new Spout(this);
-  spout.createSender("Test : A3");
+  //spout = new Spout(this);
+  //spout.createSender("Test : A3");
 }
 
 void leapOnInit() {
@@ -111,5 +111,5 @@ void draw() {
       }
     }
   }
-  spout.sendTexture();
+  //spout.sendTexture();
 }

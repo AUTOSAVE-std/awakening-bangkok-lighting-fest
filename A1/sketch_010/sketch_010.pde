@@ -1,7 +1,6 @@
-import spout.*;
+//import spout.*;
+//Spout spout;
 import de.voidplus.leapmotion.*;
-
-Spout spout;
 LeapMotion leap;
 
 int l = 30;
@@ -11,15 +10,12 @@ float easing = 0.06;
 
 void setup() {
   background(0);
-  fullScreen(P3D);
-  //size(600, 600, P3D);
+  fullScreen();
+  //size(600, 600);
   stroke(255);
-  strokeWeight(4);
   leap = new LeapMotion(this);
-
-  spout = new Spout(this);
-
-  spout.createSender("Test 1 : A1");
+  //spout = new Spout(this);
+  //spout.createSender("Test : A4");
 }
 
 void leapOnInit() {
@@ -41,9 +37,6 @@ void leapOnExit() {
 void draw() {
   background(0);
 
-  
-
-  //int fps = leap.getFrameRate();
   for (Hand hand : leap.getHands ()) {
     int     handId             = hand.getId();
     PVector handPosition       = hand.getPosition();
@@ -92,18 +85,20 @@ void draw() {
         // System.out.println("pinky");
         break;
       }
-      sx += (handPosition.x - sx) * easing;
-      sy += (handPosition.y - sy) * easing;
-      
-      //sx += (fingerPosition.x - sx) * easing;
-      //sy += (fingerPosition.y - sy) * easing;
 
+      //sx += (handPosition.x - sx) * easing;
+      //sy += (handPosition.y - sy) * easing;
+      //println(fingerId);  
+      if(finger.getType() == 1) {
+        
+      sx += (fingerPosition.x - sx) * easing;
+      sy += (fingerPosition.y - sy) * easing;
 
 
       strokeWeight(2);
 
-      for (int i = 0; i < width; i+= 60) {
-        for ( int y = 0; y < height; y += 60) {
+      for (int i = 0; i < width+100; i+= 30) {
+        for ( int y = 0; y < height+100; y += 30) {
           float d = dist(i, y, sx, sy);
           float f = l / d;
           float dx = sx - i;
@@ -112,7 +107,7 @@ void draw() {
             dx *= -1;
             dy *= -1;
             stroke(random(255), random(255), random(255));
-          } else if ( handGrab < 1 ) {
+          } else if ( handGrab == 0 ) {
             stroke(255);
           }
           noFill();
@@ -121,6 +116,7 @@ void draw() {
         }
       }
     }
+    }
   }
-  spout.sendTexture();
+  //spout.sendTexture();
 }

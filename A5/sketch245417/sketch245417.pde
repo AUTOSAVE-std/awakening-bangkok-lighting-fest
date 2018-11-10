@@ -4,8 +4,7 @@ LeapMotion leap;
 void setup() {
   fullScreen(P3D);
   //size(800, 600, P3D);
-  randX=random(1.5, 2.5);
-  randY=random(1.5, 2.5);
+ 
   textSize(30);
 
   for (int i=0; i<a.length; i++) {
@@ -15,7 +14,7 @@ void setup() {
     leap = new LeapMotion(this);
   }
 }
-int hg;
+float hg;
 int c;
 float prevX;
 float prevY;
@@ -26,13 +25,11 @@ float speed = 5;
 
 int move=0;
 
-int a[]= new int[30];
-int b[]= new int[30];
+int a[]= new int[20];
+int b[]= new int[20];
 
 float d;
 
-float randX;
-float randY;
 
 void leapOnInit() {
   // println("Leap Motion Init");
@@ -130,14 +127,15 @@ void draw() {
         // System.out.println("pinky");
         break;
       }
-      if (handGrab == 0) {
-        hg = 40;
-      } else if (handGrab > 0) {
-        hg = 20;
-      }
+      
+      
+      
+      if(finger.getType() == 1) {
+        hg = map(handGrab,0,1,10,40);
 
       fill(255);
       stroke(255);
+      //translate((width/2)-50,(height/2)-50);
       for (int i=0; i<a.length; i++) {
         prevX=-1;
         for (int j=0; j<b.length; j++) {
@@ -146,22 +144,15 @@ void draw() {
             d=.005;
           newX=a[i]-(30/d)*(handPosition.x-a[i]);
           newY=b[j]-(30/d)*(handPosition.y-b[j]);
-
-          ellipse(newX, newY, hg, hg);
-          if (prevX!=-1)
+          if (prevX!=-1  && handGrab<0.9){
+            //if(handGrab>0.8) {stroke(random(255),random(255),random(255));}
             line(prevX, prevY, newX, newY);
+          }
           prevX=newX;
           prevY=newY;
 
           stroke(255);
 
-          //iterate through the array, calculate distance (d) between mouse
-          //and each point, then move each point by (25/d)*(mouseX-pointX) and in
-          //Y. I took a lot of mathematical liberty here and just fucked with it
-          //till it worked. The idea was that if the slope created by the ball and
-          //the point is 3/4 and I want to move the point by a factor of 5, 
-          //I move x by 5*4 points and y by 5*3. Someone who's good at math would
-          //write an equation that makes more sense
         }
       }   
       for (int j=0; j<b.length; j++) {
@@ -172,13 +163,26 @@ void draw() {
             d=.001;
           newX=a[i]-(30/d)*(handPosition.x-a[i]);
           newY=b[j]-(30/d)*(handPosition.y-b[j]);
-          if (prevX!=-1)
+          if (prevX!=-1 && handGrab<0.9){
+            
             line(prevX, prevY, newX, newY);
+          }
+          //if(handGrab>0.8) {
+          //    stroke(random(255),random(200),random(160));
+          //    line(prevX, prevY, handPosition.x, handPosition.y);
+          //    fill(0);
+          //    //bezier(prevX, prevY,prevX, prevY,newX, newY, newX, newY);
+          //}
+          if(handGrab>0.9) {fill(random(255),random(200),random(160));}
+          stroke(0);
+          ellipse(newX, newY, hg, hg);
           prevX=newX;
           prevY=newY;
 
           stroke(255);
         }
+      }
+      //translate(-width/2,-height/2);
       }
     }
   }
