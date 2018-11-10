@@ -1,17 +1,28 @@
+import spout.*;
+Spout spout;
+
 import de.voidplus.leapmotion.*;
 LeapMotion leap;
 
 void setup() {
   fullScreen(P3D);
   //size(800, 600, P3D);
+<<<<<<< HEAD
  
   textSize(30);
+=======
+  randX=random(1.5, 2.5);
+  randY=random(1.5, 2.5);
+  textSize(10);
+>>>>>>> 2534c05e15403ef6eb229a678e37775a1b300b8e
 
   for (int i=0; i<a.length; i++) {
     a[i]=i*70+15;
     b[i]=i*70+15;
 
     leap = new LeapMotion(this);
+    spout = new Spout(this);
+    spout.createSender("test : a5");
   }
 }
 float hg;
@@ -21,7 +32,7 @@ float prevY;
 float newX;
 float newY;
 
-float speed = 5;
+float speed = 1;
 
 int move=0;
 
@@ -127,11 +138,19 @@ void draw() {
         // System.out.println("pinky");
         break;
       }
+<<<<<<< HEAD
       
       
       
       if(finger.getType() == 1) {
         hg = map(handGrab,0,1,10,40);
+=======
+      if (handGrab == 0) {
+        hg = 25;
+      } else if (handGrab > 0) {
+        hg = 10;
+      }
+>>>>>>> 2534c05e15403ef6eb229a678e37775a1b300b8e
 
       fill(255);
       stroke(255);
@@ -186,4 +205,9 @@ void draw() {
       }
     }
   }
+<<<<<<< HEAD
 }
+=======
+  spout.sendTexture();
+}
+>>>>>>> 2534c05e15403ef6eb229a678e37775a1b300b8e
