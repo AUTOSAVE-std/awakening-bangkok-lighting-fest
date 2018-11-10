@@ -97,11 +97,12 @@ void draw() {
           float offSet = (x)*a;
           float sz1 = map(cos(-theta+offSet), -1, 1, -60, 0);
           float sz2 = map(cos(-theta+offSet), -1, 1, 60, -60);
-          if (handGrab == 1){
-            hg = 1500;
-          }else if (handGrab < 1){
-            hg = 60;
-          }
+          //if (handGrab == 1){
+          //  hg = 1500;
+          //}else if (handGrab < 1){
+          //  hg = 60;
+          //}
+          hg = map(handGrab,0,1,30,700);
           float rot = map(cos(-theta+offSet), -1, 1, 0, hg);
 
           strokeWeight(5);
