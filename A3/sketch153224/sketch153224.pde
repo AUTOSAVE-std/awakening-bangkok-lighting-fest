@@ -58,7 +58,26 @@ void draw() {
     float   handTime           = hand.getTimeVisible();
     PVector spherePosition     = hand.getSpherePosition();
     float   sphereRadius       = hand.getSphereRadius();
+       
+      float hg = handGrab*20;
+      float hsp = map(handPosition.y,0,400,1,2);
+      for (int x = 10; x < width; x += 40) {
+        for (int y = 10; y < height; y += 40) {
+          float n = noise(x * 0.005, y * 0.005, frameCount * 0.05);
+          pushMatrix();
+          translate(x, y);
 
+          //if (handGrab == 1){
+          //  hg = 100;
+          //}else{
+          //  hg = 0;
+          //}
+          rotate(TWO_PI + hg * n);
+          scale(20 * n);
+          rect(hg/10, hg/10, hsp, hsp);
+          popMatrix();
+        }
+      }
 
     for (Finger finger : hand.getFingers()) {
       // or              hand.getOutstretchedFingers();
@@ -90,25 +109,7 @@ void draw() {
         // System.out.println("pinky");
         break;
       }
-      for (int x = 10; x < width; x += 40) {
-        for (int y = 10; y < height; y += 40) {
-          float n = noise(x * 0.005, y * 0.005, frameCount * 0.05);
-          //println(x);
-          pushMatrix();
-          translate(x, y);
-          if (handGrab == 1){
-            hg = 100;
-          }else{
-            hg = 0;
-          }
-          rotate(TWO_PI + hg * n);
- 
-          scale(20 * n);
-          println(n);
-          rect(hg/10, hg/10, 1, 1);
-          popMatrix();
-        }
-      }
+
     }
   }
   //spout.sendTexture();
